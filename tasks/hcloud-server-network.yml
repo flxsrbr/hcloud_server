@@ -1,0 +1,23 @@
+---
+- name: "Ensure server networks match desired state."
+  block:
+
+    - name: "Ensure server networks match desired state."
+      hetzner.hcloud.hcloud_server_network:
+        api_token: "{{ hcloud_server_api_token_rw }}"
+        network: "{{ net.name }}"
+        server: "{{ hcloud_server_name }}"
+        ip: "{{ net.ip }}"
+        state: "{{ net.state }}"
+      register: register_server_net
+      loop: "{{ hcloud_server_networks }}"
+      loop_control:
+        loop_var: net
+        label: net.name
+
+    - name: "Print server network output to screen."
+      debug:
+        var: register_server_net
+
+  delegate_to: localhost
+  when: "hcloud_server_state == 'present'"

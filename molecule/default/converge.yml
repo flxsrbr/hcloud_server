@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: "Include flxsrbr.hcloud_server"
+      ansible.builtin.include_role:
+        name: "flxsrbr.hcloud_server"

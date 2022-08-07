@@ -1,0 +1,16 @@
+---
+
+- name: "Gather server info from Hetzner Cloud."
+  block:
+
+    - name: "Gather hcloud server info."
+      hetzner.hcloud.hcloud_server_info:
+        api_token: "{{ hcloud_server_api_token_ro }}"
+      register: register_server_info
+
+    - name: "Print the gathered server info to screen."
+      debug:
+        var: register_server_info
+
+  delegate_to: localhost
+  when: inventory_hostname == play_hosts[-1]

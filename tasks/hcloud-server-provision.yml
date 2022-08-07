@@ -1,0 +1,23 @@
+---
+- name: "Ensure desired server state on Hetzner Cloud."
+  hetzner.hcloud.hcloud_server:
+    api_token: "{{ hcloud_server_api_token_rw }}"
+    name: "{{ hcloud_server_name }}"
+    state: "{{ hcloud_server_state }}"
+    server_type: "{{ hcloud_server_type }}"
+    image: "{{ hcloud_server_image }}"
+    datacenter: "{{ hcloud_server_datacenter }}"
+    ssh_keys: "{{ hcloud_server_ssh_keys }}"
+    backups: "{{ hcloud_server_backup }}"
+    placement_group: "{{ hcloud_server_placement_group }}"
+    enable_ipv4: "{{ hcloud_server_public_ipv4_enabled }}"
+    enable_ipv6: "{{ hcloud_server_public_ipv6_enabled }}"
+    firewalls: "{{ hcloud_server_firewalls }}"
+    volumes: "{{ hcloud_server_volumes }}"
+    force: false
+  register: register_server_state
+  delegate_to: localhost
+
+- name: "Print server creation output to screen."
+  debug:
+    var: register_server_state

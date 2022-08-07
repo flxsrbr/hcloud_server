@@ -1,0 +1,26 @@
+---
+# defaults file for hcloud_server
+
+# api token(s), optional rw-ro separation
+hcloud_server_api_token_rw: "secret"
+hcloud_server_api_token_ro: "{{ hcloud_sshkey_api_token_rw }}"
+
+# server definition defaults
+hcloud_server_state: present
+hcloud_server_name: "{{ inventory_hostname }}"
+hcloud_server_type: cx11
+hcloud_server_image: ubuntu-22.04
+hcloud_server_backup: false
+hcloud_server_datacenter: fsn1-dc14
+hcloud_server_public_ipv4_enabled: true
+hcloud_server_public_ipv6_enabeld: true
+hcloud_server_placement_group: ""
+hcloud_server_ssh_keys: []
+  # - ansible
+hcloud_server_firewalls: []
+  # - my-firewall-01
+hcloud_server_networks: []
+  # - name: internal
+    # ip: 10.0.1.100
+    # state: present
+hcloud_server_volumes: []
